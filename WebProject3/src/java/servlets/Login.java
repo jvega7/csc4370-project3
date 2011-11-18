@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,18 +32,28 @@ public class Login extends HttpServlet {
 		throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		try {
-			/*
-			 * TODO output your page here out.println("<html>");
-			 * out.println("<head>"); out.println("<title>Servlet
-			 * Menu</title>"); out.println("</head>");
-			 * out.println("<body>"); out.println("<h1>Servlet Menu
-			 * at " + request.getContextPath () + "</h1>");
-			 * out.println("</body>"); out.println("</html>");
-			 */
-		} finally {			
-			out.close();
-		}
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+			if(!allowUser(username, password)){
+				out.println("<html><head><title>Access Denied</title></head>");
+				out.println("<body>Your login and password are invalid.<br/>");
+				out.println("You may want to <a href=\"/login.jsp\">try again</a>");
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("login.isDone", username);
+				try {
+					String target = (String) session.getAttribute("login.target");
+					if (target != null) {
+						response.sendRedirect(target);
+						return;
+					}
+				}catch (Exception ignored) {
+				}
+				response.sendRedirect("/");
+			}
+	}
+	protected boolean allowUser(String username, String password){
+		return true;
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

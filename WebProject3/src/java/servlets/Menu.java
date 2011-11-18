@@ -1,83 +1,71 @@
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
 package servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author novaterata
- */
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import java.sql.*;
+
+
 public class Menu extends HttpServlet {
 
+
 	/**
-	 * Processes requests for both HTTP
-	 * <code>GET</code> and
-	 * <code>POST</code> methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try {
-			/*
-			 * TODO output your page here out.println("<html>");
-			 * out.println("<head>"); out.println("<title>Servlet
-			 * Menu</title>"); out.println("</head>");
-			 * out.println("<body>"); out.println("<h1>Servlet Menu
-			 * at " + request.getContextPath () + "</h1>");
-			 * out.println("</body>"); out.println("</html>");
-			 */
-		} finally {			
-			out.close();
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-		processRequest(request, response);
-	}
+    public void service (HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException
+    {
+        // set content type and other response header fields first
+        response.setContentType("text/html");
 
-	/** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-		processRequest(request, response);
-	}
+	//String username=request.getParameter("username");
+	//String index=request.getParameter("index");
+	int index=Integer.parseInt(request.getParameter("index"));
+	//if (index==null)index="0";        
+// get the communication channel with the requesting client
+        PrintWriter out = response.getWriter();
+out.println(index);
 
-	/** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
+String address="";
+	switch(index){
+case 0:
+	address="../main.jsp";
+	break;
+ case 4:
+	address="../login.jsp";
+	break;
+case 1:
+	address="../inventory.jsp";
+	break;
+case 2:
+	address="../viewcart.jsp";
+	break;
+case 3:
+	address="../profile.jsp";
+	break;
+case 5:
+	address="../register.jsp";
+	break;
+case 6:
+	address="../main.jsp";
+	break;
+default:
+	 address="../main.jsp";
 }
+RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+dispatcher.forward(request, response);
+
+//out.println(address);
+
+	}
+
+}
+
