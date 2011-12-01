@@ -15,7 +15,7 @@ public class UserBeanInfo extends SimpleBeanInfo {
     // Bean descriptor//GEN-FIRST:BeanDescriptor
     /*lazy BeanDescriptor*/
     private static BeanDescriptor getBdescriptor(){
-        BeanDescriptor beanDescriptor = new BeanDescriptor  ( beans.User.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
+        BeanDescriptor beanDescriptor = new BeanDescriptor  ( beans.UserBean.class , null ); // NOI18N//GEN-HEADEREND:BeanDescriptor
 
 	    // Here you can add code for customizing the BeanDescriptor.
 
@@ -30,8 +30,8 @@ public class UserBeanInfo extends SimpleBeanInfo {
         PropertyDescriptor[] properties = new PropertyDescriptor[2];
     
         try {
-            properties[PROPERTY_firstName] = new PropertyDescriptor ( "firstName", beans.User.class, "getFirstName", "setFirstName" ); // NOI18N
-            properties[PROPERTY_lastName] = new PropertyDescriptor ( "lastName", beans.User.class, "getLastName", "setLastName" ); // NOI18N
+            properties[PROPERTY_firstName] = new PropertyDescriptor ( "firstName", beans.UserBean.class, "getFirstName", "setFirstName" ); // NOI18N
+            properties[PROPERTY_lastName] = new PropertyDescriptor ( "lastName", beans.UserBean.class, "getLastName", "setLastName" ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
