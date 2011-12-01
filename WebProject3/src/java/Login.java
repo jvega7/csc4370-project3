@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import beans.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -42,20 +43,25 @@ public class Login extends HttpServlet {
 			System.out.println("com.mysql.jdbc.Driver not found");
 		}
 		try {
+			UserBean userBean= new UserBean();
+			userBean.setUsername(request.getParameter("username"));
+			userBean.setPassword(request.getParameter("password"));
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/critchea1","critchea1","peppep");
 			Statement statement = connection.createStatement();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			String query = "select * from Users where username ='" + 
+			String query = "select * from customers where username ='" + 
 				username +"' and password = '" + password + "'";
 			ResultSet results = statement.executeQuery(query);
 			if(results.next())
 			{
 				out.println("Logged in");
+				userBean.setValid(true);
 			}
 			else
 			{
 				out.println("Invalid login information");
+				userBean.setValid(false);
 			}
 			statement.close();
 			connection.close();
