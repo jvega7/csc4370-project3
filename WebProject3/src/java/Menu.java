@@ -61,6 +61,8 @@ public class Menu extends HttpServlet {
 			case 6:
 				address="main.jsp";
 				break;
+			case 7: address="logout.jsp";
+				break;
 			default:
 				 address="main.jsp";
 			}
