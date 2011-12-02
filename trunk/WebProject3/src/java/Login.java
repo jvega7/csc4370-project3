@@ -10,7 +10,6 @@ public class Login extends HttpServlet{
 	@Override
  public void doPost(HttpServletRequest request, HttpServletResponse response)
    throws ServletException,IOException{
-		DB db = new DB();
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   System.out.println("MySQL Connect Example.");
@@ -21,6 +20,7 @@ public class Login extends HttpServlet{
   Statement st=null;
   ResultSet rs=null;
   HttpSession session = request.getSession(true);
+  DB db = (DB) session.getAttribute("db");
   User user = (User) session.getAttribute("user");
   if(request.getParameter("username")!=null &&
      		!"".equals(request.getParameter("username")) && request.getParameter("password")!=null &&
@@ -53,6 +53,7 @@ public class Login extends HttpServlet{
 			user.setAdmin(rs.getInt(11) != 0);
 			user.setValid(true);
 		session.setAttribute("user",user);
+		session.setAttribute("db", db);
 		response.sendRedirect("welcome.jsp");
 		}
 	} catch (SQLException ex) {
