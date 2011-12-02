@@ -3,7 +3,7 @@
     Created on : Nov 23, 2009, 6:37:20 PM
     Author     : Freedom Rock
 --%>
-
+<jsp:useBean id="bean" scope="session" class="beans.User" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="menu">
     <ul>
