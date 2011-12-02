@@ -47,7 +47,7 @@ public class Menu extends HttpServlet {
 				address="login.jsp";
 				break;
 			case 1:
-				address="inventory.jsp";
+				address="Inventory";
 				break;
 			case 2:
 				address="viewcart.jsp";
