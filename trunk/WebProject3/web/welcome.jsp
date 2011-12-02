@@ -1,17 +1,15 @@
-<HTML> 
-<HEAD><TITLE>Welcome</TITLE></HEAD>  
-<BODY>
-<br><br><br><br>
-<table align="center" style="border:1px solid #000000;">
-<%
-if(session.getAttribute("username")!=null && session.getAttribute("username")!="")
-{
-String user = session.getAttribute("username").toString();
-%>
-<tr><td align="center"><h1>Welcome <b><%= user%></b></h1></td></tr>
-<%
-}
-%>
-</table>
-</body>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; 
+charset=UTF-8">
+        <title>Welcome</title>
+    </head>
+    <body>
+        <h1>Welcome</h1>
+        <jsp:include page="menu.jsp"></jsp:include>
+    </body>
+</html>
