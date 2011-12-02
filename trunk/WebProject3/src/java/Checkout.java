@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-import beans.UserBean;
+import beans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author novaterata
  */
-public class Login extends HttpServlet {
+public class Checkout extends HttpServlet {
 
 	/** 
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
 			System.out.println("com.mysql.jdbc.Driver not found");
 		}
 		try {
-			UserBean userBean= new UserBean();
+			User userBean= new User();
 			userBean.setUsername(request.getParameter("username"));
 			userBean.setPassword(request.getParameter("password"));
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/critchea1","critchea1","peppep");
