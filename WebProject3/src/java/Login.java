@@ -1,4 +1,5 @@
 import beans.DB;
+import beans.User;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ public class Login extends HttpServlet{
   Statement st=null;
   ResultSet rs=null;
   HttpSession session = request.getSession(true);
+  User user = (User) session.getAttribute("user");
   if(request.getParameter("username")!=null &&
      		!"".equals(request.getParameter("username")) && request.getParameter("password")!=null &&
      		!"".equals(request.getParameter("password")))
@@ -36,19 +38,22 @@ public class Login extends HttpServlet{
 
 	       System.out.println(strQuery);
 		rs = db.execSQL(strQuery);
-		int count=0;
 		while(rs.next())
 		{
-		session.setAttribute("username",rs.getString(1));
-		count++;
-		}
-		if(count>0)
-		{
+			user.setUsername(rs.getString(1));
+			user.setLastName(rs.getString(2));
+			user.setFirstName(rs.getString(3));
+			user.setAddress(rs.getString(4));
+			user.setCity(rs.getString(5));
+			user.setState(rs.getString(6));
+			user.setZipcode(rs.getInt(7));
+			user.setPhone(rs.getInt(8));
+			user.setEmail(rs.getString(9));
+			user.setPassword(rs.getString(10));
+			user.setAdmin(rs.getInt(11) != 0);
+			user.setValid(true);
+		session.setAttribute("user",user);
 		response.sendRedirect("welcome.jsp");
-		}
-		else
-		{
-	       response.sendRedirect("login.jsp");
 		}
 	} catch (SQLException ex) {
 		Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
