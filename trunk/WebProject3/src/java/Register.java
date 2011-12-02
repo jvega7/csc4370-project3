@@ -23,4 +23,37 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Register extends HttpServlet {
     
+    private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException cnfe){
+            System.out.println("com.mysql.jdbc.Driver not found");
+        }
+        
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String verifyPass = request.getParameter("verifypass");
+            String insertString = "INSERT INTO users VALUES (";
+            
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/critchea1","critchea1","peppep");
+            Statement stmt = conn.createStatement();
+            String userCheck = "SELECT username FROM users WHERE username = '" +username+ "'";
+            ResultSet r = stmt.executeQuery(userCheck);
+            if (!r.next()) {
+                insertString += "'" +username+ "',";
+            }
+            else {
+                out.println("Username " +username+ " already exists.");
+            }
+            
+        } catch (SQLException s) {s.printStackTrace();}
+        finally {
+            
+        }
+    }
 }
