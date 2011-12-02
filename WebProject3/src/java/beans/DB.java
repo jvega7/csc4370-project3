@@ -9,21 +9,68 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.LinkedList;
 
 /**
  *
  * @author novaterata
  */
 public class DB{
-	String DbUrl = "jdbc:mysql://localhost/critchea1";
-	String username = "critchea1";
-	String password = "peppep";
-	String dbDriver = "com.mysql.jdbc.Driver";
+	private String DbUrl = "jdbc:mysql://localhost/critchea1";
+	private String username = "critchea1";
+	private String password = "peppep";
+	private String dbDriver = "com.mysql.jdbc.Driver";
+
+	public String getDbUrl() {
+		return DbUrl;
+	}
+
+	public void setDbUrl(String DbUrl) {
+		this.DbUrl = DbUrl;
+	}
+
+	public Connection getDbCon() {
+		return dbCon;
+	}
+
+	public void setDbCon(Connection dbCon) {
+		this.dbCon = dbCon;
+	}
+
+	public String getDbDriver() {
+		return dbDriver;
+	}
+
+	public void setDbDriver(String dbDriver) {
+		this.dbDriver = dbDriver;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	private Connection dbCon;
+	private LinkedList<InventoryItem> inventory;
+
+	public LinkedList<InventoryItem> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(LinkedList<InventoryItem> inventory) {
+		this.inventory = inventory;
+	}
 	public DB() {
-		super();
 	}
 	public boolean connect() throws ClassNotFoundException,SQLException{ 
 		Class.forName(dbDriver); 

@@ -2,6 +2,7 @@
 <jsp:useBean id="user" scope="session" class="beans.User" />
 <jsp:useBean id="cart" scope="session" class="beans.ShopingCart" />
 <jsp:useBean id="db" scope="session" class="beans.DB" />
+<jsp:useBean id="item" scope="session" class="beans.InventoryItem" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="menu">
     <ul>
