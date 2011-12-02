@@ -14,10 +14,10 @@ public class ShopingCart{
 	private String userid;
 	private int orderid;
 	private User user;
-	private LinkedList cart;
+	private LinkedList<InventoryItem> cart;
 	private int total;
 
-	public LinkedList getCart() {
+	public LinkedList<InventoryItem> getCart() {
 		return cart;
 	}
 

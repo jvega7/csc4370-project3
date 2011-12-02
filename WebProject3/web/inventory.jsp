@@ -11,19 +11,36 @@
 	<body>
         	<h1>Inventory</h1>
         	<jsp:include page="menu.jsp"></jsp:include>
-		<table>
 <%
 	for(int i = 0; i < db.getInventory().size(); i++){
 		session.setAttribute("item", db.getInventory().get(i));
 %>
+<table width="50%">
 			<tr>
-				<td>
+				<td colspan="2">
 					<jsp:getProperty name="item" property="name"/>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					SKU: <jsp:getProperty name="item" property="sku"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					$<jsp:getProperty name="item" property="price"/>
+				</td>
+			<tr>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<jsp:getProperty name="item" property="description"/>
+				</td>
+			</tr>
+		</table>
+					<br/>
 <%
 	}
 %>
-		</table>
 	</body>
 </html>
