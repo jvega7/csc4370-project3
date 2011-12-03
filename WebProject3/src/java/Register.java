@@ -23,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Register extends HttpServlet {
     
-    private void register(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+        } catch (IOException io) {}
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException cnfe){
