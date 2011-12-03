@@ -21,6 +21,8 @@ public class DB{
 	private String username = "critchea1";
 	private String password = "peppep";
 	private String dbDriver = "com.mysql.jdbc.Driver";
+	static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart) VALUES (?, NULL, ?)";
+    	static final String SQL_TO_READ_OBJECT = "SELECT cart FROM orders WHERE userid = ?";
 
 	public String getDbUrl() {
 		return DbUrl;
@@ -35,7 +37,7 @@ public class DB{
 	}
 
 	public void setDbCon(Connection dbCon) {
-		this.dbCon = dbCon;
+		DB.dbCon = dbCon;
 	}
 
 	public String getDbDriver() {
@@ -61,7 +63,7 @@ public class DB{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	private Connection dbCon;
+	private static Connection dbCon;
 	private LinkedList<InventoryItem> inventory;
 
 	public LinkedList<InventoryItem> getInventory() {
@@ -99,4 +101,21 @@ public class DB{
 		int r = ps.executeUpdate(sql);
 		return (r == 0) ? 0 :r;
 	}
+ public static long writeJavaObject(String userid, Object object)
+            throws Exception {
+//        String className = object.getClass().getName();
+        PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_WRITE_OBJECT, Statement.RETURN_GENERATED_KEYS);
+        pstmt.setString(1, userid);
+        pstmt.setObject(2, object);
+        pstmt.executeUpdate();
+        ResultSet rs = pstmt.getGeneratedKeys();
+        int id = -1;
+        if (rs.next()) {
+            id = rs.getInt(1);
+        }
+        rs.close();
+        pstmt.close();
+        System.out.println("Serialization Successful.");
+        return id;
+    }
 }
