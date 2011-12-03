@@ -11,7 +11,7 @@ charset=UTF-8">
     <body>
         <h1>Register</h1>
         <jsp:include page="menu.jsp"></jsp:include>
-        <form action ="Register" method ="POST">
+        <form action ="Register" method="POST">
             <div>Create Username: <input type="text" name="username" value="" /></div>
             <div>Create Password: <input type="password" name="password" value="" /></div>
             <div>Verify Password: <input type="password" name="verifypass" value="" /></div>
