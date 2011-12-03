@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
             if (!r.next()) {
                 if (!username.isEmpty()) {
                     insertString += "'" +username+ "',";
-                    if (verifyPass.equals(password)) {
+                    if (verifyPass.equals(password) && !password.isEmpty()) {
                         insertString += "'" +password+ "')";
                         valid = true;
                     }
@@ -76,9 +76,9 @@ public class Register extends HttpServlet {
             else {
                 out.println("Could not register account.");
             }
+            stmt.close();
         } catch (SQLException s) {s.printStackTrace();}
         finally {
-            
         }
     }
 }
