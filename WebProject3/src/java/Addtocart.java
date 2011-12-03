@@ -5,7 +5,7 @@
 
 import beans.DB;
 import beans.InventoryItem;
-import beans.ShopingCart;
+import beans.ShoppingCart;
 import beans.User;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -44,7 +44,7 @@ public class Addtocart extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		DB db = (DB) session.getAttribute("db");
 		LinkedList<InventoryItem> inventory = db.getInventory();
-		ShopingCart cart = (ShopingCart) session.getAttribute("cart");
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		InventoryItem item = inventory.get(index);
 		LinkedList<InventoryItem> cartList;
 		double total;

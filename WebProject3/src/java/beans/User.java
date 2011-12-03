@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author novaterata
@@ -15,6 +17,16 @@ public class User{
 	private int zipcode;
 	private int phone;
 	private String email;
+	private LinkedList<LinkedList<InventoryItem>> orders;
+
+	public LinkedList<LinkedList<InventoryItem>> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(LinkedList<LinkedList<InventoryItem>> orders) {
+		this.orders = orders;
+	}
+
 
 	public String getAddress() {
 		return address;

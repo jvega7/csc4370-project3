@@ -4,14 +4,14 @@
  */
 package beans;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author novaterata
  */
-public class ShopingCart{
+public class ShoppingCart implements Serializable{
 	private int orderid;
 	private LinkedList<InventoryItem> cartList;
 	private double total;
@@ -30,7 +30,7 @@ public class ShopingCart{
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}
-	public ShopingCart() {
+	public ShoppingCart() {
 	}
 
 	public LinkedList<InventoryItem> getCartList() {

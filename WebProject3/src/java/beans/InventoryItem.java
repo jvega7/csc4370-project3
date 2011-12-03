@@ -4,13 +4,13 @@
  */
 package beans;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
 /**
  *
  * @author novaterata
  */
-public class InventoryItem {
+public class InventoryItem implements Serializable{
 	private String description;
 	private long sku;
 	private String name;
