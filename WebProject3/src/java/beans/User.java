@@ -18,6 +18,15 @@ public class User{
 	private int phone;
 	private String email;
 	private LinkedList<LinkedList<InventoryItem>> orders;
+	private LinkedList<Integer> orderNumbers;
+
+	public LinkedList<Integer> getOrderNumbers() {
+		return orderNumbers;
+	}
+
+	public void setOrderNumbers(LinkedList<Integer> orderNumbers) {
+		this.orderNumbers = orderNumbers;
+	}
 
 	public LinkedList<LinkedList<InventoryItem>> getOrders() {
 		return orders;

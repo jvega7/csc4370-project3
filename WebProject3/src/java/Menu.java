@@ -34,8 +34,6 @@ public class Menu extends HttpServlet {
 			//String username=request.getParameter("username");
 			//String index=request.getParameter("index");
 			int index=Integer.parseInt(request.getParameter("index"));
-			//if (index==null)index="0";        
-			// get the communication channel with the requesting client
 			out.println(index);
 
 			String address="";
@@ -53,7 +51,7 @@ public class Menu extends HttpServlet {
 				address="viewcart.jsp";
 				break;
 			case 3:
-				address="profile.jsp";
+				address="Profile";
 				break;
 			case 5:
 				address="register.jsp";
@@ -68,10 +66,6 @@ public class Menu extends HttpServlet {
 			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 			dispatcher.forward(request, response);
-
-			//out.println(address);
-
-
 		} finally {			
 			out.close();
 		}
