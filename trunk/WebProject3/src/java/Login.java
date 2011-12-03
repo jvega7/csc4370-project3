@@ -1,4 +1,5 @@
 import beans.DB;
+import beans.InventoryItem;
 import beans.User;
 import java.io.*;
 import java.util.logging.Level;
@@ -6,6 +7,7 @@ import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
+import java.util.LinkedList;
 public class Login extends HttpServlet{ 
 	@Override
  public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,7 +40,7 @@ public class Login extends HttpServlet{
 
 	       System.out.println(strQuery);
 		rs = db.execSQL(strQuery);
-		while(rs.next())
+		if(rs.next())
 		{
 			user.setUsername(rs.getString(1));
 			user.setLastName(rs.getString(2));
@@ -52,9 +54,34 @@ public class Login extends HttpServlet{
 			user.setPassword(rs.getString(10));
 			user.setAdmin(rs.getInt(11) != 0);
 			user.setValid(true);
-		session.setAttribute("user",user);
-		session.setAttribute("db", db);
-		response.sendRedirect("welcome.jsp");
+			strQuery = "select * from orders where userid='"+username+"'";
+			ResultSet rs2 = db.execSQL(strQuery);
+			LinkedList<LinkedList<InventoryItem>> orders = new LinkedList();
+			while(rs2.next()){
+				ByteArrayInputStream bais;
+				ObjectInputStream in;
+				LinkedList<InventoryItem> cartList = new LinkedList();
+				try {
+					in = new ObjectInputStream(rs2.getBinaryStream("cart"));
+					LinkedList<InventoryItem> cart = (LinkedList<InventoryItem>) in.readObject();
+					in.close();
+					orders.add(cart);
+					System.out.println("orders size ="+orders.size());
+				} catch (IOException ex) {
+				ex.printStackTrace();
+				} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+				}
+			user.setOrders(orders);
+			for(int i = 0; i < orders.size(); i++){
+				for(int j = 0; j < orders.get(i).size(); j++){
+					System.out.println(orders.get(i).get(j).getName());
+				}
+			}
+			}
+			session.setAttribute("user",user);
+			session.setAttribute("db", db);
+			response.sendRedirect("welcome.jsp");
 		}
 	} catch (SQLException ex) {
 		Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,7 +91,6 @@ public class Login extends HttpServlet{
   {
  response.sendRedirect("login.jsp");
   }
-  System.out.println("Connected to the database"); 
 		try {
 			db.close();
 		} catch (SQLException ex) {

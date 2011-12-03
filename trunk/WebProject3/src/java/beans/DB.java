@@ -4,13 +4,14 @@
  */
 package beans;
 
+import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
-
 /**
  *
  * @author novaterata
@@ -89,5 +90,13 @@ public class DB{
 		Statement s = dbCon.createStatement();
 		int r = s.executeUpdate(sql);
 		return (r == 0) ? 0 : r; 
+	}
+	public int updateSQLBytes(String sql, byte[] byteObject) throws SQLException{
+		PreparedStatement ps = dbCon.prepareStatement(sql);
+		Blob blob = dbCon.createBlob();
+		blob.setBytes(1, byteObject);
+		ps.setBlob(1, blob);
+		int r = ps.executeUpdate(sql);
+		return (r == 0) ? 0 :r;
 	}
 }

@@ -3,20 +3,27 @@
  * and open the template in the editor.
  */
 
+import beans.DB;
+import beans.InventoryItem;
+import beans.ShoppingCart;
 import beans.User;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,96 +40,38 @@ public class Checkout extends HttpServlet {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException  
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException, SQLException, ClassNotFoundException{
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException cnfe){
-			System.out.println("com.mysql.jdbc.Driver not found");
-		}
-		try {
-			User userBean= new User();
-			userBean.setUsername(request.getParameter("username"));
-			userBean.setPassword(request.getParameter("password"));
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/critchea1","critchea1","peppep");
-			Statement statement = connection.createStatement();
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			String query = "select * from customers where username ='" + 
-				username +"' and password = '" + password + "'";
-			ResultSet results = statement.executeQuery(query);
-			if(results.next())
-			{
-				out.println("Logged in");
-				userBean.setValid(true);
-			}
-			else
-			{
-				out.println("Invalid login information");
-				userBean.setValid(false);
-			}
-			statement.close();
-			connection.close();
-		} catch (SQLException sqle){
-			int error = sqle.getErrorCode();
-			out.println("FAIL"+error);
-		} finally {
-			
-			out.close();
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/** 
-	 * Handles the HTTP <code>GET</code> method.
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+		throws ServletException, IOException{
 		try {
+			response.setContentType("text/html;charset=UTF-8");
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			DB db = (DB) session.getAttribute("db");
+			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+			String userid = user.getUsername();
+			LinkedList<InventoryItem> cartList = cart.getCartList();
+			ByteArrayOutputStream baos;
+			ObjectOutputStream oos;
+			baos = new ByteArrayOutputStream();
 			try {
-				processRequest(request, response);
-			} catch (ClassNotFoundException ex) {
-				Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+				oos = new ObjectOutputStream(baos);
+				oos.writeObject(cartList);
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+			byte[] byteObject = baos.toByteArray();
+			String order = new String(byteObject);
+			String query = "INSERT INTO `critchea1`.`orders` (`userid`, `orderid`, `cart`) VALUES ('"+userid+"', NULL, ?)";
+			db.connect();
+			db.updateSQLBytes(query,byteObject);
+			db.close();
+			response.sendRedirect("welcome.jsp");
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SQLException ex) {
-			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
-	/** 
-	 * Handles the HTTP <code>POST</code> method.
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
-		try {
-			try {
-				processRequest(request, response);
-			} catch (ClassNotFoundException ex) {
-				Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		} catch (SQLException ex) {
-			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	/** 
-	 * Returns a short description of the servlet.
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
 }
