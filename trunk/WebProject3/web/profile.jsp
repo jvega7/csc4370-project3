@@ -1,5 +1,9 @@
+<%@page import="beans.InventoryItem"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="beans.DB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="user" scope="session" class="beans.User"/>
+<jsp:useBean id="db" scope="session" class="beans.DB"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -54,5 +58,16 @@ charset=UTF-8">
 			</tr>
 		</table>
 	</div>
+			<div class="orders">
+					<%LinkedList<LinkedList<InventoryItem>> orders = user.getOrders();
+					for (int i = 0; i < orders.size(); i++){
+						out.println("<p>"+user.getOrderNumbers().get(i));
+						LinkedList<InventoryItem> cartList = orders.get(i);
+						for (int j = 0 ; j < cartList.size(); j++){
+							InventoryItem item = cartList.get(j);
+							out.println("<br/>SKU: "+item.getSku()+"<br/>Name: "+item.getName()+"<br/>Price: "+item.getPrice());
+						}
+					}%>
+			</div>
     </body>
 </html>

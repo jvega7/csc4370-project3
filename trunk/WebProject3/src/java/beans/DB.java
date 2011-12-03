@@ -4,6 +4,8 @@
  */
 package beans;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -21,9 +23,18 @@ public class DB{
 	private String username = "critchea1";
 	private String password = "peppep";
 	private String dbDriver = "com.mysql.jdbc.Driver";
-	static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart) VALUES (?, NULL, ?)";
-    	static final String SQL_TO_READ_OBJECT = "SELECT cart FROM orders WHERE userid = ?";
+	private static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart) VALUES (?, NULL, ?)";
+    	private static final String SQL_TO_READ_OBJECT = "SELECT * FROM ORDERS WHERE userid = ?";
+	private static LinkedList<Integer> orderNumbers;
 
+	public static LinkedList<Integer> getOrderNumbers() {
+		return orderNumbers;
+	}
+
+	public static void setOrderNumbers(LinkedList<Integer> orderNumbers) {
+		DB.orderNumbers = orderNumbers;
+	}
+	
 	public String getDbUrl() {
 		return DbUrl;
 	}
@@ -101,7 +112,7 @@ public class DB{
 		int r = ps.executeUpdate(sql);
 		return (r == 0) ? 0 :r;
 	}
- public static long writeJavaObject(String userid, Object object)
+ public static long writeCartList(String userid, Object object)
             throws Exception {
 //        String className = object.getClass().getName();
         PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_WRITE_OBJECT, Statement.RETURN_GENERATED_KEYS);
@@ -117,5 +128,30 @@ public class DB{
         pstmt.close();
         System.out.println("Serialization Successful.");
         return id;
+    }
+  /**
+     * This class will de-serialize a java object from the database
+     */
+    public static LinkedList<LinkedList<InventoryItem>> readOrders(String userid)
+            throws Exception {
+        PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_READ_OBJECT);
+        pstmt.setString(1, userid);
+        ResultSet rs = pstmt.executeQuery();
+	LinkedList<LinkedList<InventoryItem>> orders = new LinkedList();
+	orderNumbers = new LinkedList();
+        while(rs.next()){
+	orderNumbers.add(rs.getInt("orderid"));
+        byte[] buf = rs.getBytes("cart");
+        ObjectInputStream objectIn = null;
+        objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));
+	Object object = null;
+        object = objectIn.readObject();
+	LinkedList<InventoryItem> cartList = (LinkedList<InventoryItem>) object;
+	orders.add(cartList);
+	}
+        rs.close();
+        pstmt.close();
+        System.out.println("Deserialization Successful.");
+        return orders;
     }
 }
