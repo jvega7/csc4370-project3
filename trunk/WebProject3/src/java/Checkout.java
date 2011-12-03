@@ -10,12 +10,7 @@ import beans.User;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,21 +46,26 @@ public class Checkout extends HttpServlet {
 			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 			String userid = user.getUsername();
 			LinkedList<InventoryItem> cartList = cart.getCartList();
-			ByteArrayOutputStream baos;
-			ObjectOutputStream oos;
-			baos = new ByteArrayOutputStream();
-			try {
-				oos = new ObjectOutputStream(baos);
-				oos.writeObject(cartList);
-				oos.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			byte[] byteObject = baos.toByteArray();
-			String order = new String(byteObject);
-			String query = "INSERT INTO `critchea1`.`orders` (`userid`, `orderid`, `cart`) VALUES ('"+userid+"', NULL, ?)";
+//			ByteArrayOutputStream baos;
+//			ObjectOutputStream oos;
+//			baos = new ByteArrayOutputStream();
+//			try {
+//				oos = new ObjectOutputStream(baos);
+//				oos.writeObject(cartList);
+//				oos.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			byte[] byteObject = baos.toByteArray();
+//			String order = new String(byteObject);
+//			String query = "INSERT INTO `critchea1`.`orders` (`userid`, `orderid`, `cart`) VALUES ('"+userid+"', NULL, ?)";
 			db.connect();
-			db.updateSQLBytes(query,byteObject);
+			try {
+				//			db.updateSQLBytes(query,byteObject);
+							DB.writeJavaObject(userid, cartList);
+			} catch (Exception ex) {
+				Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
+			}
 			db.close();
 			response.sendRedirect("welcome.jsp");
 		} catch (ClassNotFoundException ex) {
