@@ -12,6 +12,10 @@
         <servlet-name>Inventory</servlet-name>
         <servlet-class>Inventory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Addtocart</servlet-name>
+        <servlet-class>Addtocart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Inventory</servlet-name>
         <url-pattern>/Inventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Addtocart</servlet-name>
+        <url-pattern>/Addtocart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

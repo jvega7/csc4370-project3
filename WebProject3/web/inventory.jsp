@@ -37,6 +37,7 @@
 					<jsp:getProperty name="item" property="description"/>
 				</td>
 			</tr>
+			<tr><td><a href="Addtocart?index=<%out.print(i);%>">Add to Cart</a></td></tr>
 		</table>
 					<br/>
 <%

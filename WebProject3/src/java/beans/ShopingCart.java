@@ -4,6 +4,7 @@
  */
 package beans;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 
 /**
@@ -11,20 +12,17 @@ import java.util.LinkedList;
  * @author novaterata
  */
 public class ShopingCart{
-	private String userid;
 	private int orderid;
-	private User user;
-	private LinkedList<InventoryItem> cart;
-	private int total;
+	private LinkedList<InventoryItem> cartList;
+	private double total;
 
-	public LinkedList<InventoryItem> getCart() {
-		return cart;
+	public double getTotal() {
+		return total;
 	}
 
-	public void setCart(LinkedList cart) {
-		this.cart = cart;
+	public void setTotal(double total) {
+		this.total = total;
 	}
-
 	public int getOrderid() {
 		return orderid;
 	}
@@ -32,30 +30,15 @@ public class ShopingCart{
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}
-
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
 	public ShopingCart() {
 	}
+
+	public LinkedList<InventoryItem> getCartList() {
+		return cartList;
+	}
+
+	public void setCartList(LinkedList<InventoryItem> cartList) {
+		this.cartList = cartList;
+	}
+
 }
