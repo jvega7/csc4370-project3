@@ -35,6 +35,7 @@ public class Register extends HttpServlet {
         }
         
         try {
+            boolean valid = false;
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String verifyPass = request.getParameter("verifypass");
@@ -45,12 +46,34 @@ public class Register extends HttpServlet {
             String userCheck = "SELECT username FROM users WHERE username = '" +username+ "'";
             ResultSet r = stmt.executeQuery(userCheck);
             if (!r.next()) {
-                insertString += "'" +username+ "',";
+                if (!username.isEmpty()) {
+                    insertString += "'" +username+ "',";
+                    if (verifyPass.equals(password)) {
+                        insertString += "'" +password+ "')";
+                        valid = true;
+                    }
+                    else if (password.isEmpty()){
+                        out.println("Must enter a password.");
+                    }
+                    else {
+                        out.println("Passwords do not match.");
+                    }
+                }
+                else {
+                    out.println("Must enter a username.");
+                }
             }
             else {
                 out.println("Username " +username+ " already exists.");
             }
             
+            if (valid) {
+                stmt.executeUpdate(insertString);
+                out.println("Account created successfully!");
+            }
+            else {
+                out.println("Could not register account.");
+            }
         } catch (SQLException s) {s.printStackTrace();}
         finally {
             
