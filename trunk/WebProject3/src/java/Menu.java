@@ -5,6 +5,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -64,8 +66,13 @@ public class Menu extends HttpServlet {
 			default:
 				 address="main.jsp";
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-			dispatcher.forward(request, response);
+				response.sendRedirect(address);
+//			RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+//			try{
+//			dispatcher.forward(request, response);
+//			} catch(NullPointerException npe){
+//			Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, npe);
+//			}
 		} finally {			
 			out.close();
 		}

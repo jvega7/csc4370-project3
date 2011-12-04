@@ -1,5 +1,6 @@
 import beans.DB;
 import beans.InventoryItem;
+import beans.ShoppingCart;
 import beans.User;
 import java.io.*;
 import java.util.logging.Level;
@@ -81,6 +82,7 @@ public class Login extends HttpServlet{
 			}
 			session.setAttribute("user",user);
 			session.setAttribute("db", db);
+			session.setAttribute("cart", new ShoppingCart());
 			response.sendRedirect("welcome.jsp");
 		}
 	} catch (SQLException ex) {

@@ -31,6 +31,7 @@ public class ShoppingCart implements Serializable{
 		this.orderid = orderid;
 	}
 	public ShoppingCart() {
+		cartList = new LinkedList();
 	}
 
 	public LinkedList<InventoryItem> getCartList() {
