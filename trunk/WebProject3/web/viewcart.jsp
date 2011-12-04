@@ -38,7 +38,7 @@
 			</tr>
                         <tr>    
                             <td>
-                                <a href="Removefromcart?index1=<%out.print(i);%>">Remove from Cart</a>
+                                <a href="Removefromcart?index=<%out.print(i);%>">Remove from Cart</a>
                             </td>
                         </tr>
 		</table>

@@ -28,6 +28,10 @@
         <servlet-name>Profile</servlet-name>
         <servlet-class>Profile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Removefromcart</servlet-name>
+        <servlet-class>Removefromcart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Removefromcart</servlet-name>
+        <url-pattern>/Removefromcart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
