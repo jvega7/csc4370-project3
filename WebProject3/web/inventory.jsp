@@ -47,7 +47,7 @@
                                 <%
                                 }else{
                                 %>
-                                Log in to Add to Cart
+				<a href="Menu?index=4">Log in</a> to Add to Cart
                                 <%
                                 }
                                 %>
