@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="user" scope="session" class="beans.User" />
 <jsp:useBean id="db" scope="session" class="beans.DB"/>
 <jsp:useBean id="item" scope="session" class="beans.InventoryItem"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -37,7 +38,20 @@
 					<jsp:getProperty name="item" property="description"/>
 				</td>
 			</tr>
-			<tr><td><a href="Addtocart?index=<%out.print(i);%>">Add to Cart</a></td></tr>
+			<tr><td>
+                                <%
+                                if(user.isValid())
+                                {
+                                %>
+                                <a href="Addtocart?index=<%out.print(i);%>">Add to Cart</a>
+                                <%
+                                }else{
+                                %>
+                                Log in to Add to Cart
+                                <%
+                                }
+                                %>
+                        </td></tr>
 		</table>
 					<br/>
 <%
