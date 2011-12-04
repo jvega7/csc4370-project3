@@ -1,6 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"/>
-<jsp:useBean id="item" scope="session" class="beans.InventoryItem"/>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,6 +9,7 @@
 	<body>
         	<h1>Shopping Cart</h1>
         	<jsp:include page="menu.jsp"></jsp:include>
+<jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"/>
 <%
 	for(int i = 0; i < cart.getCartList().size(); i++){
 		session.setAttribute("item", cart.getCartList().get(i));
@@ -41,9 +40,15 @@
 					<br/>
 <%
 	}
+	if(!cart.getCartList().isEmpty()){
 %>
 <p>Total: <jsp:getProperty name="cart" property="total"/>
 	<br/>
 <p><a href="Checkout">Checkout</a>
+	<%
+	} else {
+		out.print("<p>Shopping Cart is Empty<br/>");
+	}
+	%>
 	</body>
 </html>
