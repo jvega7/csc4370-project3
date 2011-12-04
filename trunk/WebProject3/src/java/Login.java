@@ -50,7 +50,7 @@ public class Login extends HttpServlet{
 			user.setCity(rs.getString(5));
 			user.setState(rs.getString(6));
 			user.setZipcode(rs.getInt(7));
-			user.setPhone(rs.getInt(8));
+			user.setPhone(rs.getLong(8));
 			user.setEmail(rs.getString(9));
 			user.setPassword(rs.getString(10));
 			user.setAdmin(rs.getInt(11) != 0);

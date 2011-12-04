@@ -15,7 +15,7 @@ public class User{
 	private String city;
 	private String state;
 	private int zipcode;
-	private int phone;
+	private long phone;
 	private String email;
 	private LinkedList<LinkedList<InventoryItem>> orders;
 	private LinkedList<Integer> orderNumbers;
@@ -61,11 +61,11 @@ public class User{
 		this.email = email;
 	}
 
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
