@@ -48,7 +48,7 @@ public class Removefromcart extends HttpServlet{
 		double total;
                 cartList = cart.getCartList();
                 total = cart.getTotal() - item.getPrice();
-		cartList.remove(item);
+		cartList.remove(index);
 		cart.setTotal(total);
 		cart.setCartList(cartList);
 		session.setAttribute("cart", cart);
