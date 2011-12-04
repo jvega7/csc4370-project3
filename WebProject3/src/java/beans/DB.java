@@ -25,6 +25,7 @@ public class DB{
 	private String dbDriver = "com.mysql.jdbc.Driver";
 	private static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart) VALUES (?, NULL, ?)";
     	private static final String SQL_TO_READ_OBJECT = "SELECT * FROM ORDERS WHERE userid = ?";
+	private static final String SQL_TO_ADD_USER = "INSERT INTO CUSTOMERS(username, LastName, FirstName, Address, City, State, ZipCode, Phone, EMail, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static LinkedList<Integer> orderNumbers;
 
 	public static LinkedList<Integer> getOrderNumbers() {
@@ -111,6 +112,29 @@ public class DB{
 		ps.setBlob(1, blob);
 		int r = ps.executeUpdate(sql);
 		return (r == 0) ? 0 :r;
+	}
+	public static long addUser(User user) throws SQLException{
+		PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_ADD_USER, Statement.RETURN_GENERATED_KEYS);
+		pstmt.setString(1, user.getUsername());
+		pstmt.setString(2, user.getLastName());
+		pstmt.setString(3, user.getFirstName());
+		pstmt.setString(4, user.getAddress());
+		pstmt.setString(5, user.getCity());
+		pstmt.setString(6, user.getState());
+		pstmt.setInt(7, user.getZipcode());
+		pstmt.setString(8, ""+user.getPhone());
+		pstmt.setString(9, user.getEmail());
+		pstmt.setString(10, user.getPassword());
+		pstmt.setBoolean(11, user.isAdmin());
+		pstmt.executeUpdate();
+		ResultSet rs = pstmt.getGeneratedKeys();
+		int id = -1;
+		if (rs.next()){
+			id = rs.getInt(1);
+		}
+		rs.close();
+		System.out.println(""+user.getUsername()+" added to database.");
+		return id;
 	}
  public static long writeCartList(String userid, Object object)
             throws Exception {
