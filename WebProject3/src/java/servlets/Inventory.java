@@ -19,9 +19,9 @@ public class Inventory extends HttpServlet{
   Statement st=null;
   ResultSet rs=null;
   HttpSession session = request.getSession(true);
-  DB db = (DB) session.getAttribute("db");
+  DB db = new DB();
 	try {
-		strQuery="SELECT * FROM inventory";
+		strQuery="SELECT * FROM critchea1.inventory";
 
 		try {
 			db.connect();
@@ -43,6 +43,7 @@ public class Inventory extends HttpServlet{
 		db.setInventory(inventory);
 		session.setAttribute("db", db);
 		session.setAttribute("item",item);
+		db.close();
 		response.sendRedirect("inventory.jsp");
 	} catch (SQLException ex) {
 		Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
