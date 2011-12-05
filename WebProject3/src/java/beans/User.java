@@ -1,5 +1,6 @@
 package beans;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 
 /**
@@ -18,14 +19,14 @@ public class User{
 	private long phone;
 	private String email;
 	private LinkedList<LinkedList<InventoryItem>> orders;
-	private LinkedList<Integer> orderNumbers;
+	private LinkedList<Timestamp> timestamps;
 
-	public LinkedList<Integer> getOrderNumbers() {
-		return orderNumbers;
+	public LinkedList<Timestamp> getTimestamps() {
+		return timestamps;
 	}
 
-	public void setOrderNumbers(LinkedList<Integer> orderNumbers) {
-		this.orderNumbers = orderNumbers;
+	public void setTimestamps(LinkedList<Timestamp> timestamps) {
+		this.timestamps = timestamps;
 	}
 
 	public LinkedList<LinkedList<InventoryItem>> getOrders() {

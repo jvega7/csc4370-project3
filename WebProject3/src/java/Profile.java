@@ -43,7 +43,7 @@ public class Profile extends HttpServlet {
 			db.connect();
 			try {
 				user.setOrders(DB.readOrders(userid));
-				user.setOrderNumbers(DB.getOrderNumbers());
+				user.setTimestamps(DB.getTimestamps());
 			} catch (Exception ex) {
 				Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
 			}

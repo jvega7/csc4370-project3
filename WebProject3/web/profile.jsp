@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="beans.InventoryItem"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="beans.DB"%>
@@ -61,7 +62,8 @@ charset=UTF-8">
 			<div class="orders">
 					<%LinkedList<LinkedList<InventoryItem>> orders = user.getOrders();
 					for (int i = 0; i < orders.size(); i++){
-						out.println("<p>"+user.getOrderNumbers().get(i));
+						if(user.getTimestamps().get(i) != null)
+							out.println("<p>"+user.getTimestamps().get(i).toString());
 						LinkedList<InventoryItem> cartList = orders.get(i);
 						for (int j = 0 ; j < cartList.size(); j++){
 							InventoryItem item = cartList.get(j);
