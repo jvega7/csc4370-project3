@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="htmlheader.jsp"/> 
-        <h1>Login</h1>
         <jsp:include page="menu.jsp"></jsp:include>
+        <h1>Login</h1>
 	<form action="Login" method="POST">
 		<table>
 			<tr><th>Enter Username</th><td><div class="entry"><input type="text" name="username" value="" /></div></td></tr>
