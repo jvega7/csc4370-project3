@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.LinkedList;
 /**
  *
@@ -23,19 +25,18 @@ public class DB{
 	private String username = "critchea1";
 	private String password = "peppep";
 	private String dbDriver = "com.mysql.jdbc.Driver";
-	private static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart) VALUES (?, NULL, ?)";
+	private static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart, timestamp) VALUES (?, NULL, ?, ?)";
     	private static final String SQL_TO_READ_OBJECT = "SELECT * FROM ORDERS WHERE userid = ?";
 	private static final String SQL_TO_ADD_USER = "INSERT INTO CUSTOMERS(username, LastName, FirstName, Address, City, State, ZipCode, Phone, EMail, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static LinkedList<Integer> orderNumbers;
+	private static LinkedList<Timestamp> timestamps;
 
-	public static LinkedList<Integer> getOrderNumbers() {
-		return orderNumbers;
+	public static LinkedList<Timestamp> getTimestamps() {
+		return timestamps;
 	}
 
-	public static void setOrderNumbers(LinkedList<Integer> orderNumbers) {
-		DB.orderNumbers = orderNumbers;
+	public static void setTimestamps(LinkedList<Timestamp> timestamps) {
+		DB.timestamps = timestamps;
 	}
-	
 	public String getDbUrl() {
 		return DbUrl;
 	}
@@ -142,6 +143,7 @@ public class DB{
         PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_WRITE_OBJECT, Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, userid);
         pstmt.setObject(2, object);
+	pstmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
         pstmt.executeUpdate();
         ResultSet rs = pstmt.getGeneratedKeys();
         int id = -1;
@@ -162,9 +164,9 @@ public class DB{
         pstmt.setString(1, userid);
         ResultSet rs = pstmt.executeQuery();
 	LinkedList<LinkedList<InventoryItem>> orders = new LinkedList();
-	orderNumbers = new LinkedList();
+	timestamps = new LinkedList();
         while(rs.next()){
-	orderNumbers.add(rs.getInt("orderid"));
+	timestamps.add(rs.getTimestamp("timestamp"));
         byte[] buf = rs.getBytes("cart");
         ObjectInputStream objectIn = null;
         objectIn = new ObjectInputStream(new ByteArrayInputStream(buf));

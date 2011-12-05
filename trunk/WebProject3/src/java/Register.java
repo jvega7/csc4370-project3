@@ -36,6 +36,7 @@ public class Register extends HttpServlet {
 			user.setEmail((String) request.getParameter("email"));
 			user.setPassword((String) request.getParameter("password"));
 			user.setAdmin(false);
+			user.setValid(true);
 			DB db = (DB) session.getAttribute("db");
 		try {
 			db.connect();

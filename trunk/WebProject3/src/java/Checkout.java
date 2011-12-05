@@ -53,6 +53,8 @@ public class Checkout extends HttpServlet {
 				Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			db.close();
+			cart = new ShoppingCart();
+			session.setAttribute("cart", cart);
 			response.sendRedirect("welcome.jsp");
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
