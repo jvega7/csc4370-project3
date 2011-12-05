@@ -1,0 +1,69 @@
+/* 
+    Document   : default
+    Created on : Dec 4, 2011, 7:07:37 PM
+    Author     : novaterata
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+body{
+	background-color:#770000;
+}
+h1 {
+	text-align:right;
+	font-family:'Bookman';
+	font-size:32px;
+	font-weight:bold;
+	color:#AAAAAA;
+	background-color:#000000
+}
+ul {
+	text-align:left;
+	font-family:'Andale Mono';
+	font-size:18px;
+	font-weight:bold;
+	color:#AAAAAA;
+	background-color:#000000;
+	border-left-width:2px;
+	border-left-style:solid;
+	border-left-color:#FFFFFF;
+	border-top-width:3px;
+	border-top-style:solid;
+	border-top-color:#FFFFFF;
+	border-bottom-width:9px;
+	border-bottom-style:solid;
+	border-right-width:5px;
+	border-right-style:solid;
+
+}
+td {
+	background-color:#222222
+}
+img.right{
+	float:right
+}
+div.w3c{
+	position:fixed;
+	bottom:5px;
+	right:5px;
+}
+button {
+    background: #222222 no-repeat scroll top right;
+	color:#AAAAAA;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
