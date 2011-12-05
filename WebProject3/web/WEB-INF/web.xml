@@ -32,6 +32,10 @@
         <servlet-name>Removefromcart</servlet-name>
         <servlet-class>servlets.Removefromcart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>servlets.EditProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>Removefromcart</servlet-name>
         <url-pattern>/Removefromcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/EditProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
