@@ -60,6 +60,6 @@ public class Addtocart extends HttpServlet {
 		cart.setTotal(total);
 		cart.setCartList(cartList);
 		session.setAttribute("cart", cart);
-		response.sendRedirect("viewcart.jsp");
+		response.sendRedirect("inventory.jsp");
 	}
 }

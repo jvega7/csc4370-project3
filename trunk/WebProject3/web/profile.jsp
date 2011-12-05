@@ -6,50 +6,44 @@
 <jsp:useBean id="user" scope="session" class="beans.User"/>
 <jsp:useBean id="db" scope="session" class="beans.DB"/>
 <jsp:include page="htmlheader.jsp" />
-	<div class="menu">
         <jsp:include page="menu.jsp"></jsp:include>
-	</div>
-	<div class="profile">
+	<div id="sidebar">
+		<h1>Customer Profile</h1>
 		<table>
 			<tr>
-				<td>Username:</td>
-				<td><jsp:getProperty name="user" property="username" /></td>
+				<th>Username</th>
+				<td colspan="3"><jsp:getProperty name="user" property="username" /></td>
 			</tr>
 			<tr>
-				<td>First Name:</td>
-				<td><jsp:getProperty name="user" property="firstName"/></td>
+				<th>First Name</th>
+				<td colspan="3"><jsp:getProperty name="user" property="firstName"/></td>
 			</tr>
 			<tr>
-				<td>Last Name:</td>
-				<td><jsp:getProperty name="user" property="lastName" /></td>
+				<th>Last Name</th>
+				<td colspan="3"><jsp:getProperty name="user" property="lastName" /></td>
 			</tr>
 			<tr>
-				<td>Address:</td>
-				<td><jsp:getProperty name="user" property="address" /></td>
+				<th>Address</th>
+				<td colspan="3"><jsp:getProperty name="user" property="address" /></td>
 			</tr>
 			<tr>
-				<td>City:</td>
+				<th></th>
 				<td><jsp:getProperty name="user" property="city" /></td>
-			</tr>
-			<tr>
-				<td>State:</td>
 				<td><jsp:getProperty name="user" property="state" /></td>
-			</tr>
-			<tr>
-				<td>Zipcode:</td>
 				<td><jsp:getProperty name="user" property="zipcode" /></td>
 			</tr>
 			<tr>
-				<td>Phone:</td>
-				<td><jsp:getProperty name="user" property="phone"/></td>
+				<th>Phone</th>
+				<td colspan="3"><jsp:getProperty name="user" property="phone"/></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
-				<td><jsp:getProperty name="user" property="email" /></td>
+				<th>Email</th>
+				<td colspan="3"><jsp:getProperty name="user" property="email" /></td>
 			</tr>
 		</table>
 	</div>
-			<div class="orders">
+			<div id="content">
+				<h1>Order History</h1>
 					<%LinkedList<LinkedList<InventoryItem>> orders = user.getOrders();
 					for (int i = 0; i < orders.size(); i++){
 						if(user.getTimestamps().get(i) != null)

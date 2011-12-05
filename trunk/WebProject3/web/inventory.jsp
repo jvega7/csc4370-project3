@@ -4,7 +4,11 @@
 <jsp:useBean id="item" scope="session" class="beans.InventoryItem"/>
 <jsp:include page="htmlheader.jsp"/> 
         	<jsp:include page="menu.jsp"></jsp:include>
-		<jsp:include page="sidebar.jsp"/>
+		<% if(user.isValid()){ %>
+	    <h1>Welcome <jsp:getProperty name="user" property="firstName"/>
+		    <jsp:getProperty name="user" property="lastName" /></h1>
+		    <% } %>
+		<jsp:include page="viewcart.jsp"/>
 		<div id="content">
 <%
 	for(int i = 0; i < db.getInventory().size(); i++){

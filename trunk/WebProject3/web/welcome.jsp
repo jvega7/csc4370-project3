@@ -4,4 +4,5 @@
 	    <h1>Welcome <jsp:getProperty name="user" property="firstName"/>
 		    <jsp:getProperty name="user" property="lastName" /></h1>
         <jsp:include page="menu.jsp"></jsp:include>
+	<jsp:forward page="Inventory"/>
 <jsp:include page="htmlfooter.html" />

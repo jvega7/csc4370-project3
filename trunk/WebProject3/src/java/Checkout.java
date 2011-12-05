@@ -55,7 +55,7 @@ public class Checkout extends HttpServlet {
 			db.close();
 			cart = new ShoppingCart();
 			session.setAttribute("cart", cart);
-			response.sendRedirect("welcome.jsp");
+			response.sendRedirect("inventory.jsp");
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SQLException ex) {

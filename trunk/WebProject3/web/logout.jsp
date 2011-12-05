@@ -1,4 +1,4 @@
 <%
 session.invalidate();
 %>
-        <jsp:include page="main.jsp"></jsp:include>
+        <jsp:include page="login.jsp"></jsp:include>
