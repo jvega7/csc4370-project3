@@ -1,9 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="htmlheader.jsp"/>
-        <title>Shopping</title>
-    </head>
-    <body>
-        <h1>Register</h1>
+        <h1>Join!</h1>
         <jsp:include page="menu.jsp"></jsp:include>
         <form action ="Register" method="POST">
 		<table>
@@ -21,5 +18,4 @@
 		</table>
             <input type="submit" value="Register" name="register" >
         </form>
-    </body>
-</html>
+	<jsp:include page="htmlfooter.html" />

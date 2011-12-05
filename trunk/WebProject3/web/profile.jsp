@@ -6,10 +6,6 @@
 <jsp:useBean id="user" scope="session" class="beans.User"/>
 <jsp:useBean id="db" scope="session" class="beans.DB"/>
 <jsp:include page="htmlheader.jsp" />
-        <title>Shopping</title>
-    </head>
-    <body>
-        <h1>Profile</h1>
 	<div class="menu">
         <jsp:include page="menu.jsp"></jsp:include>
 	</div>
@@ -65,5 +61,4 @@
 						}
 					}%>
 			</div>
-    </body>
-</html>
+					<jsp:include page="htmlfooter.html" />

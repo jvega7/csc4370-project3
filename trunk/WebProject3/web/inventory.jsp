@@ -3,15 +3,16 @@
 <jsp:useBean id="db" scope="session" class="beans.DB"/>
 <jsp:useBean id="item" scope="session" class="beans.InventoryItem"/>
 <jsp:include page="htmlheader.jsp"/> 
-        	<title>Shopping</title>
-	</head>
-	<body>
-        	<h1>Inventory</h1>
         	<jsp:include page="menu.jsp"></jsp:include>
+		<jsp:include page="sidebar.jsp"/>
+		<div id="content">
 <%
 	for(int i = 0; i < db.getInventory().size(); i++){
 		session.setAttribute("item", db.getInventory().get(i));
 %>
+				<div class="post">
+					<h2 class="title"><img src="images/krampusnacht-blog.png" alt="Krampus Nacht" /></h2>
+					<div class="entry">
 <table width="50%">
 			<tr>
 				<td colspan="2">
@@ -43,15 +44,17 @@
                                 <%
                                 }else{
                                 %>
-				<a href="Menu?index=4">Log in</a> to Add to Cart
-                                <%
+					<div><a href="Menu?index=4">Log in</a> to Add to Cart</div>
+				                                <%
                                 }
                                 %>
                         </td></tr>
 		</table>
-					<br/>
+		<img src="images/footer.png" alt="Village"/>
+				</div>
+			</div>
+			<!-- end #content -->
 <%
 	}
 %>
-	</body>
-</html>
+<jsp:include page="htmlfooter.html" />

@@ -4,7 +4,8 @@
 <jsp:useBean id="db" scope="session" class="beans.DB" />
 <jsp:useBean id="item" scope="session" class="beans.InventoryItem" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="menu">
+<div id="header">
+	<div id="menu">
     <ul>
         <li>
 <a href="Menu?index=0">Main</a>
@@ -39,4 +40,12 @@ if(user.isValid())
 }
 %>
 </ul>
+	</div>
+	<!-- end #menu -->
+	<div id="logo">
+		<h1><a href="#">Welcome to Krampus Nacht</a></h1>
+	</div>
 </div>
+<!-- end #header -->
+<!-- end #header-wrapper -->
+<!-- end #logo -->

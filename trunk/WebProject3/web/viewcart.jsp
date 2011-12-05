@@ -1,8 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="htmlheader.jsp" />
-        	<title>Shopping</title>
-	</head>
-	<body>
         	<h1>Shopping Cart</h1>
         	<jsp:include page="menu.jsp"></jsp:include>
 <jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"/>
@@ -51,5 +48,4 @@
 		out.print("<p>Shopping Cart is Empty<br/>");
 	}
 	%>
-	</body>
-</html>
+	<jsp:include page="htmlfooter.html" />
