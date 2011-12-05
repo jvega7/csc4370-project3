@@ -4,3 +4,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="default.css">
+        <title>Willkommen bei Gottfrieds Krampus Nacht Emporium!</title>
+    </head>
+    <body>
+	    <div id="page">
+	<div id="page-bgtop">
+		<div id="page-bgbtm">
