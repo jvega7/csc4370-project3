@@ -41,6 +41,8 @@
 				<td colspan="3"><jsp:getProperty name="user" property="email" ></jsp:getProperty></td>
 			</tr>
 		</table>
+                <br/>
+                <h2><a href="editprofile.jsp">Edit Profile</a></h2>
 	</div>
 			<div id="content">
 				<h1>Order History</h1>
@@ -51,8 +53,8 @@
 						LinkedList<InventoryItem> cartList = orders.get(i);
 						for (int j = 0 ; j < cartList.size(); j++){
 							InventoryItem item = cartList.get(j);
-							out.println("<br/>SKU: "+item.getSku()+"<br/>Name: "+item.getName()+"<br/>Price: "+item.getPrice());
+							out.println("<br/>SKU: "+item.getSku()+"<br/>Title: \""+item.getName()+"\"<br/>Price: $"+item.getPrice());
 						}
 					}%>
 			</div>
-					<jsp:include page="htmlfooter.html" ></jsp:include>
+<jsp:include page="htmlfooter.html" ></jsp:include>

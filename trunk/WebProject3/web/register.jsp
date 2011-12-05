@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="htmlheader.jsp"></jsp:include>
-        <h1>Join!</h1>
         <jsp:include page="menu.jsp"></jsp:include>
+        <h1>Join!</h1>
         <form action ="Register" method="post">
 		<table>
 		<tr><td>Enter Username:</td><td><input type="text" name="username" value="" ></td></tr>
