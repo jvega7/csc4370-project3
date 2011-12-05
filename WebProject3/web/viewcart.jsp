@@ -1,15 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="htmlheader.jsp" />
-        	<h1>Shopping Cart</h1>
-        	<jsp:include page="menu.jsp"></jsp:include>
+<div id="sidebar">
 <jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"/>
+<jsp:useBean id="user" scope="session" class="beans.User"/>
+<%
+	if(!cart.getCartList().isEmpty() && user.getFirstName() != null){
+%>
+<h1>Shopping Cart</h1>
+	<%
+	}%>
+<ul>
 <%
 	for(int i = 0; i < cart.getCartList().size(); i++){
 		session.setAttribute("item", cart.getCartList().get(i));
 %>
+<li>
 <table width="50%">
 			<tr>
-				<td colspan="2">
+				<th rowspan="4"><h2><% out.print((i+1));%></h2></th>
+				<td>
 					<jsp:getProperty name="item" property="name"/>
 				</td>
 			</tr>
@@ -22,30 +30,29 @@
 				<td>
 					$<jsp:getProperty name="item" property="price"/>
 				</td>
-			<tr>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<jsp:getProperty name="item" property="description"/>
-				</td>
-			</tr>
                         <tr>    
                             <td>
-                                <a href="Removefromcart?index=<%out.print(i);%>">Remove from Cart</a>
+                                <div class="menu"><h3><a href="Removefromcart?index=<%out.print(i);%>">Remove from Cart</a></h3></div>
                             </td>
                         </tr>
 		</table>
-					<br/>
+			    </li>
 <%
 	}
-	if(!cart.getCartList().isEmpty()){
+%>
+</ul>
+<%
+	if(!cart.getCartList().isEmpty() && user.getFirstName() != null){
 %>
 <p>Total: <jsp:getProperty name="cart" property="total"/>
 	<br/>
-<p><a href="Checkout">Checkout</a>
+<p><h2><a href="Checkout">Checkout</a></h2>
 	<%
-	} else {
-		out.print("<p>Shopping Cart is Empty<br/>");
-	}
+	} else { %>
+	<h1>About Us</h1>
+<p>Krampus is a mythical creature recognized in Alpine countries. According to legend, Krampus accompanies St. Nicholas during the Christmas season, warning and punishing bad children, in contrast to St. Nicholas, who gives gifts to good children.<br/><br/>
+<p>In the Alpine regions, Krampus is represented by a demon-like creature. Traditionally young men dress up as the Krampus in Austria and southern Bavaria during the first two weeks of December, particularly on the evening of 5 December, and roam the streets frightening children with rusty chains and bells.<br/><br/>
+<p>In the aftermath of the 1934 Austrian Civil War, the Krampus tradition was a target[for what? clarification needed] of the Dollfuss regime.<br/><br/>
+	<% }
 	%>
-	<jsp:include page="htmlfooter.html" />
+	</div>

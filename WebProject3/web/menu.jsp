@@ -8,33 +8,27 @@
 	<div id="menu">
     <ul>
         <li>
-<a href="Menu?index=0">Main</a>
+<h2><a href="Menu?index=0">Main</a></h2>
         </li>
-        <li>
-<a href="Menu?index=1">Inventory</a>
-</li>
 <%
 if(user.isValid())
 {
 %>
- <li>
-<a href="Menu?index=2">View Cart</a>
+        <li>
+<h2><a href="Menu?index=3">Profile & Order History</a></h2>
 </li>
         <li>
-<a href="Menu?index=3">Profile(past orders)</a>
-</li>
-        <li>
-<a href="Menu?index=7">Logout</a>
+<h2><a href="Menu?index=7">Logout</a></h2>
 </li>
 
 <%
 }else{
 %>
         <li>
-<a href="Menu?index=4">Login</a>
+<h2><a href="Menu?index=4">Login</a></h2>
 </li>
         <li>
-<a href="Menu?index=5">Register</a>
+<h2><a href="Menu?index=5">Register</a></h2>
 </li>
 <%
 }
@@ -43,7 +37,7 @@ if(user.isValid())
 	</div>
 	<!-- end #menu -->
 	<div id="logo">
-		<h1><a href="#">Welcome to Krampus Nacht</a></h1>
+		<h1><a href="#">Hüten Sie sich vor Krampus!</a></h1>
 	</div>
 </div>
 <!-- end #header -->
