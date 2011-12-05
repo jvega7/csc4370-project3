@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="htmlheader.jsp"/>
+<jsp:include page="htmlheader.jsp"></jsp:include>
         <h1>Join!</h1>
         <jsp:include page="menu.jsp"></jsp:include>
-        <form action ="Register" method="POST">
+        <form action ="Register" method="post">
 		<table>
 		<tr><td>Enter Username:</td><td><input type="text" name="username" value="" ></td></tr>
 		<tr><td>Enter Password:</td><td><input type="password" name="password" value="" ></td></tr>
@@ -18,4 +18,4 @@
 		</table>
             <input type="submit" value="Register" name="register" >
         </form>
-	<jsp:include page="htmlfooter.html" />
+	<jsp:include page="htmlfooter.html" ></jsp:include>

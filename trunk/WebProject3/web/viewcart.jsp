@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="sidebar">
-<jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"/>
-<jsp:useBean id="user" scope="session" class="beans.User"/>
+	<jsp:useBean id="cart" scope="session" class="beans.ShoppingCart"></jsp:useBean>
+	<jsp:useBean id="user" scope="session" class="beans.User"></jsp:useBean>
 <%
 	if(!cart.getCartList().isEmpty() && user.getFirstName() != null){
 %>
@@ -18,17 +18,17 @@
 			<tr>
 				<th rowspan="4"><h2><% out.print((i+1));%></h2></th>
 				<td>
-					<jsp:getProperty name="item" property="name"/>
+					<jsp:getProperty name="item" property="name"></jsp:getProperty>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					SKU: <jsp:getProperty name="item" property="sku"/>
+					SKU: <jsp:getProperty name="item" property="sku"></jsp:getProperty>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					$<jsp:getProperty name="item" property="price"/>
+					$<jsp:getProperty name="item" property="price"></jsp:getProperty>
 				</td>
                         <tr>    
                             <td>
@@ -44,7 +44,7 @@
 <%
 	if(!cart.getCartList().isEmpty() && user.getFirstName() != null){
 %>
-<p>Total: <jsp:getProperty name="cart" property="total"/>
+<p>Total: <jsp:getProperty name="cart" property="total"></jsp:getProperty>
 	<br/>
 <p><h2><a href="Checkout">Checkout</a></h2>
 	<%

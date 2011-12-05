@@ -1,12 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="user" scope="session" class="beans.User" />
-<jsp:useBean id="db" scope="session" class="beans.DB"/>
-<jsp:useBean id="item" scope="session" class="beans.InventoryItem"/>
+<jsp:useBean id="user" scope="session" class="beans.User" ></jsp:useBean>
+<jsp:useBean id="db" scope="session" class="beans.DB"></jsp:useBean>
+<jsp:useBean id="item" scope="session" class="beans.InventoryItem"></jsp:useBean>
 <jsp:include page="htmlheader.jsp"/> 
         	<jsp:include page="menu.jsp"></jsp:include>
 		<% if(user.isValid()){ %>
-	    <h1>Welcome <jsp:getProperty name="user" property="firstName"/>
-		    <jsp:getProperty name="user" property="lastName" /></h1>
+		<h1>Welcome <jsp:getProperty name="user" property="firstName"></jsp:getProperty>
+			<jsp:getProperty name="user" property="lastName" ></jsp:getProperty></h1>
 		    <% } %>
 		<jsp:include page="viewcart.jsp"/>
 		<div id="content">
@@ -20,23 +20,23 @@
 <table width="50%">
 			<tr>
 				<td colspan="2">
-					<jsp:getProperty name="item" property="name"/>
+					<jsp:getProperty name="item" property="name"></jsp:getProperty>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					SKU: <jsp:getProperty name="item" property="sku"/>
+					SKU: <jsp:getProperty name="item" property="sku"></jsp:getProperty>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					$<jsp:getProperty name="item" property="price"/>
+					$<jsp:getProperty name="item" property="price"></jsp:getProperty>
 				</td>
 			<tr>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<jsp:getProperty name="item" property="description"/>
+					<jsp:getProperty name="item" property="description"></jsp:getProperty>
 				</td>
 			</tr>
 			<tr><td>
@@ -62,4 +62,4 @@
 	}
 %>
 		</div>
-<jsp:include page="htmlfooter.html" />
+<jsp:include page="htmlfooter.html" ></jsp:include>
