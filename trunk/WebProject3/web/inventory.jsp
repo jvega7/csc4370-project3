@@ -61,4 +61,5 @@
 <%
 	}
 %>
+		</div>
 <jsp:include page="htmlfooter.html" />
