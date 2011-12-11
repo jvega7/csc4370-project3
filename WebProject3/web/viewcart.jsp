@@ -50,9 +50,16 @@
 	<%
 	} else { %>
 	<h1>About Us</h1>
-<p>Krampus is a mythical creature recognized in Alpine countries. According to legend, Krampus accompanies St. Nicholas during the Christmas season, warning and punishing bad children, in contrast to St. Nicholas, who gives gifts to good children.<br/><br/>
-<p>In the Alpine regions, Krampus is represented by a demon-like creature. Traditionally young men dress up as the Krampus in Austria and southern Bavaria during the first two weeks of December, particularly on the evening of 5 December, and roam the streets frightening children with rusty chains and bells.<br/><br/>
-<p>In the aftermath of the 1934 Austrian Civil War, the Krampus tradition was a target[for what? clarification needed] of the Dollfuss regime.<br/><br/>
+	<div class="entry">
+<blockquote>Krampus is a mythical creature recognized in Alpine countries. According to legend, Krampus accompanies St. Nicholas during the Christmas season, warning and punishing bad children, in contrast to St. Nicholas, who gives gifts to good children.</blockquote>
+<blockquote>In the Alpine regions, Krampus is represented by a demon-like creature. Traditionally young men dress up as the Krampus in Austria and southern Bavaria during the first two weeks of December, particularly on the evening of 5 December, and roam the streets frightening children with rusty chains and bells.</blockquote>
 	<% }
+	if(user.getFirstName() == null){
+		%>
+		<jsp:include page="login.jsp"/>
+		<%
+
+	}
 	%>
+	</div>
 	</div>

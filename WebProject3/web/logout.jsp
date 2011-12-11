@@ -1,4 +1,4 @@
 <%
 session.invalidate();
 %>
-        <jsp:include page="login.jsp"></jsp:include>
+<jsp:forward page="/Inventory"/>

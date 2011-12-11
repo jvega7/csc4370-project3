@@ -1,4 +1,4 @@
-package servlets;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -45,7 +45,7 @@ public class Register extends HttpServlet {
                 db.close();
                 session.setAttribute("user", user);
                 try {
-                        response.sendRedirect("welcome.jsp");
+                        response.sendRedirect("inventory.jsp");
                 } catch (IOException ex) {
                         Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
                 }

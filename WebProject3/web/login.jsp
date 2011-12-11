@@ -1,6 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="htmlheader.jsp"/> 
-        <jsp:include page="menu.jsp"></jsp:include>
         <h1>Login</h1>
 	<form action="Login" method="POST">
 		<table>
@@ -9,4 +7,3 @@
 		</table>
 		<div><input type="submit" value="Submit" name="submit" /></div>
 	</form>
-<jsp:include page="htmlfooter.html" />

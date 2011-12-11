@@ -1,4 +1,4 @@
-package servlets;
+
 
 import beans.DB;
 import beans.InventoryItem;
@@ -33,11 +33,20 @@ public class Inventory extends HttpServlet{
 			InventoryItem item = new InventoryItem();
 		while(rs.next())
 		{
+			int quantity = (int) rs.getInt("quantity");
+			if (quantity < 1) continue;
 			item = new InventoryItem();
 			item.setSku(Long.parseLong(rs.getString("sku")));
 			item.setName(rs.getString("name"));
 			item.setPrice(Double.parseDouble(rs.getString("price")));
 			item.setDescription(rs.getString("description"));
+			item.setAvailable(rs.getInt("quantity"));
+			File f = new File(getServletContext().getRealPath("")+"/images/"+item.getSku()+".jpg");
+			if(!f.exists()){
+				response.setContentType("image/jpeg");
+				Blob img = rs.getBlob("image");
+				item.setImage(getServletContext().getRealPath(""), img.getBytes(1, (int)img.length()));
+			}
 			inventory.add(item);
 		}
 		db.setInventory(inventory);

@@ -28,6 +28,7 @@ public class DB{
 	private static final String SQL_TO_WRITE_OBJECT = "INSERT INTO ORDERS(userid, orderid, cart, timestamp) VALUES (?, NULL, ?, ?)";
     	private static final String SQL_TO_READ_OBJECT = "SELECT * FROM ORDERS WHERE userid = ?";
 	private static final String SQL_TO_ADD_USER = "INSERT INTO CUSTOMERS(username, LastName, FirstName, Address, City, State, ZipCode, Phone, EMail, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String SQL_TO_DECREASE_ITEM = "UPDATE critchea1.inventory SET quantity = quantity - 1 WHERE sku = ?";
 	private static LinkedList<Timestamp> timestamps;
 
 	public static LinkedList<Timestamp> getTimestamps() {
@@ -153,6 +154,11 @@ public class DB{
         rs.close();
         pstmt.close();
         System.out.println("Serialization Successful.");
+	LinkedList<InventoryItem> cartList = (LinkedList<InventoryItem>) object;
+	for(int i = 0; i < cartList.size(); i++){
+		InventoryItem item = cartList.get(i);
+		decreaseInventory(1, item.getSku());
+	}
         return id;
     }
   /**
@@ -179,5 +185,14 @@ public class DB{
         pstmt.close();
         System.out.println("Deserialization Successful.");
         return orders;
+    }
+    public static void decreaseInventory(int quantity, long sku) throws SQLException{
+	PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_DECREASE_ITEM);
+	pstmt.setLong(1, sku);
+	for (;quantity > 0; quantity--){
+		pstmt.executeUpdate();
+	}
+	pstmt.close();
+	System.out.println(sku + " decreased " + quantity + " time(s).");
     }
 }

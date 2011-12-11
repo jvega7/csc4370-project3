@@ -1,4 +1,9 @@
-package servlets;
+
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import beans.DB;
 import beans.InventoryItem;
@@ -15,17 +20,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author Cody
+ * @author novaterata
  */
-public class Removefromcart extends HttpServlet{
-    	/** 
+public class Addtocart extends HttpServlet {
+
+	/** 
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 * @param request servlet request
 	 * @param response servlet response
@@ -48,13 +50,18 @@ public class Removefromcart extends HttpServlet{
 		InventoryItem item = inventory.get(index);
 		LinkedList<InventoryItem> cartList;
 		double total;
-                cartList = cart.getCartList();
-                total = cart.getTotal() - item.getPrice();
-		cartList.remove(index);
+		if(cart.getCartList() == null){
+			cartList = new LinkedList();
+			total = item.getPrice();
+		}
+		else{
+			cartList = cart.getCartList();
+			total = cart.getTotal() + item.getPrice();
+		}
+		cartList.add(item);
 		cart.setTotal(total);
 		cart.setCartList(cartList);
 		session.setAttribute("cart", cart);
 		response.sendRedirect("inventory.jsp");
-    }
-    
+	}
 }
