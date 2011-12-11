@@ -1,4 +1,4 @@
-package servlets;
+
 
 import beans.DB;
 import beans.InventoryItem;
@@ -34,7 +34,7 @@ public class Login extends HttpServlet{
 	try {
 		username = request.getParameter("username").toString();
 		userpass = request.getParameter("password").toString();
-		strQuery="select * from customers where username='"+username+"' and  password='"+userpass+"'";
+		strQuery="select * from critchea1.customers where username='"+username+"' and  password='"+userpass+"'";
 		try {
 			db.connect();
 		} catch (ClassNotFoundException ex) {

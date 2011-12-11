@@ -5,41 +5,42 @@
 <jsp:include page="htmlheader.jsp"/> 
         	<jsp:include page="menu.jsp"></jsp:include>
 		<% if(user.isValid()){ %>
-		<h1>Welcome <jsp:getProperty name="user" property="firstName"></jsp:getProperty>
+		<h1><% out.print(session.getAttribute("checkout"));%>&nbsp;<jsp:getProperty name="user" property="firstName"></jsp:getProperty>
 			<jsp:getProperty name="user" property="lastName" ></jsp:getProperty></h1>
 		    <% } %>
-		<jsp:include page="viewcart.jsp"/>
 		<div id="content">
+					<h2 class="title"><img src="images/krampusnacht-blog.png" alt="Krampus Nacht" /></h2>
 <%
 	for(int i = 0; i < db.getInventory().size(); i++){
 		session.setAttribute("item", db.getInventory().get(i));
 %>
 				<div class="post">
-					<h2 class="title"><img src="images/krampusnacht-blog.png" alt="Krampus Nacht" /></h2>
 					<div class="entry">
-<table width="50%">
+<table>
 			<tr>
-				<td colspan="2">
+				<td colspan="4">
+					<h1>
 					<jsp:getProperty name="item" property="name"></jsp:getProperty>
+					</h1>
 				</td>
 			</tr>
 			<tr>
 				<td>
+					<h2>
 					SKU: <jsp:getProperty name="item" property="sku"></jsp:getProperty>
+					</h2>
 				</td>
+				<td colspan="3"></td>
 			</tr>
 			<tr>
 				<td>
-					$<jsp:getProperty name="item" property="price"></jsp:getProperty>
+					<h2>$<jsp:getProperty name="item" property="price"></jsp:getProperty></h2>
 				</td>
-			<tr>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<jsp:getProperty name="item" property="description"></jsp:getProperty>
+				<td>
+					<h2>Quantity: <jsp:getProperty name="item" property="available"/>
 				</td>
-			</tr>
-			<tr><td>
+				<td colspan="2"></td>
+			<tr><td colspan="4">
                                 <%
                                 if(user.isValid())
                                 {
@@ -48,18 +49,27 @@
                                 <%
                                 }else{
                                 %>
-					<div><a href="Menu?index=4">Log in</a> to Add to Cart</div>
+					<div><a href="register.jsp">Register</a> or Login to Add to Cart</div>
 				                                <%
                                 }
                                 %>
-                        </td></tr>
+				</td><td></td></tr>
+			<tr>
+				<td colspan="4">
+					<img src="<jsp:getProperty name="item" property="image"/>" alt="No Image" height="256" style="float:right;margin:4px;"/>
+					<div class="entry"><br/><br/>
+					<jsp:getProperty name="item" property="description"></jsp:getProperty>
+					</div>
+				</td>
+			</tr>
 		</table>
-		<img src="images/footer.png" alt="Village"/>
 				</div>
 			</div>
 			<!-- end #content -->
 <%
 	}
 %>
+		<img src="images/footer.png" alt="Village"/>
 		</div>
+		<jsp:include page="viewcart.jsp"/>
 <jsp:include page="htmlfooter.html" ></jsp:include>

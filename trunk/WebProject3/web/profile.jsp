@@ -53,6 +53,7 @@
 						LinkedList<InventoryItem> cartList = orders.get(i);
 						for (int j = 0 ; j < cartList.size(); j++){
 							InventoryItem item = cartList.get(j);
+							out.println("<img src=\""+item.getImage()+"\" width=\"64\" style=\"float:right;\"/>");
 							out.println("<br/>SKU: "+item.getSku()+"<br/>Title: \""+item.getName()+"\"<br/>Price: $"+item.getPrice());
 						}
 					}%>

@@ -2,39 +2,43 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlets.Login</servlet-class>
+        <servlet-class>Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Menu</servlet-name>
-        <servlet-class>servlets.Menu</servlet-class>
+        <servlet-class>Menu</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Inventory</servlet-name>
-        <servlet-class>servlets.Inventory</servlet-class>
+        <servlet-class>Inventory</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Addtocart</servlet-name>
-        <servlet-class>servlets.Addtocart</servlet-class>
+        <servlet-class>Addtocart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Checkout</servlet-name>
-        <servlet-class>servlets.Checkout</servlet-class>
+        <servlet-class>Checkout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>servlets.Register</servlet-class>
+        <servlet-class>Register</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>servlets.Profile</servlet-class>
+        <servlet-class>Profile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Removefromcart</servlet-name>
-        <servlet-class>servlets.Removefromcart</servlet-class>
+        <servlet-class>Removefromcart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditProfile</servlet-name>
-        <servlet-class>servlets.EditProfile</servlet-class>
+        <servlet-class>EditProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Image</servlet-name>
+        <servlet-class>Image</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/EditProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Image</servlet-name>
+        <url-pattern>/Image</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

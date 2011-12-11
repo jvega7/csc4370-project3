@@ -6,14 +6,14 @@
 	<div id="menu">
     <ul>
         <li>
-<h2><a href="Menu?index=0">Main</a></h2>
+<h2><a href="Menu?index=0">Shop</a></h2>
         </li>
 <%
 if(user.isValid())
 {
 %>
         <li>
-<h2><a href="Menu?index=3">Profile & Order History</a></h2>
+<h2><a href="Menu?index=3">View Profile & Order History</a></h2>
 </li>
         <li>
 <h2><a href="Menu?index=7">Logout</a></h2>
@@ -21,10 +21,8 @@ if(user.isValid())
 
 <%
 }else{
+	session.setAttribute("checkout", "Welcome");
 %>
-        <li>
-<h2><a href="Menu?index=4">Login</a></h2>
-</li>
         <li>
 <h2><a href="Menu?index=5">Register</a></h2>
 </li>
