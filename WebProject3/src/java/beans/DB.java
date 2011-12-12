@@ -30,6 +30,7 @@ public class DB{
 	private static final String SQL_TO_ADD_USER = "INSERT INTO CUSTOMERS(username, LastName, FirstName, Address, City, State, ZipCode, Phone, EMail, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_TO_DECREASE_ITEM = "UPDATE critchea1.inventory SET quantity = quantity - 1 WHERE sku = ?";
 	private static final String SQL_TO_CHECK_USERNAME_EXISTS = "select * from critchea1.customers where username=?";
+	private static final String SQL_TO_UPDATE_USER = "UPDATE critchea1.customers SET LastName = ?, FirstName = ?, Address = ?, City = ?, State = ?, ZipCode = ?, Phone = ?, EMail = ?, password = ? WHERE username = ?";
 		
 	private static LinkedList<Timestamp> timestamps;
 
@@ -116,6 +117,28 @@ public class DB{
 		ps.setBlob(1, blob);
 		int r = ps.executeUpdate(sql);
 		return (r == 0) ? 0 :r;
+	}
+	public static long updateUser(User user) throws SQLException{
+		PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_UPDATE_USER, Statement.RETURN_GENERATED_KEYS);
+		pstmt.setString(1, user.getLastName());
+		pstmt.setString(2, user.getFirstName());
+		pstmt.setString(3, user.getAddress());
+		pstmt.setString(4, user.getCity());
+		pstmt.setString(5, user.getState());
+		pstmt.setInt(6, user.getZipcode());
+		pstmt.setString(7, ""+user.getPhone());
+		pstmt.setString(8, user.getEmail());
+		pstmt.setString(9, user.getPassword());
+		pstmt.setString(10, user.getUsername());
+		pstmt.executeUpdate();
+		ResultSet rs = pstmt.getGeneratedKeys();
+		int id = -1;
+		if (rs.next()){
+			id = rs.getInt(1);
+		}
+		rs.close();
+		System.out.println(""+user.getUsername()+" updated in database.");
+		return id;
 	}
 	public static long addUser(User user) throws SQLException{
 		PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_ADD_USER, Statement.RETURN_GENERATED_KEYS);

@@ -25,8 +25,7 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        User user = new User();
-        user.setUsername((String) request.getParameter("username"));
+	User user = (User) session.getAttribute("user");
         user.setLastName((String) request.getParameter("last"));
         user.setFirstName((String) request.getParameter("first"));
         user.setAddress((String) request.getParameter("address"));
@@ -36,16 +35,14 @@ public class EditProfile extends HttpServlet {
         user.setPhone(Long.parseLong(request.getParameter("phone")));
         user.setEmail((String) request.getParameter("email"));
         user.setPassword((String) request.getParameter("password"));
-        user.setAdmin(false);
-        user.setValid(true);
         DB db = (DB) session.getAttribute("db");
         try {
                 db.connect();
-                DB.addUser(user);
+                DB.updateUser(user);
                 db.close();
                 session.setAttribute("user", user);
                 try {
-                        response.sendRedirect("welcome.jsp");
+                        response.sendRedirect("Profile");
                 } catch (IOException ex) {
                         Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
                 }
