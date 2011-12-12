@@ -50,9 +50,8 @@
             <h2><a href="profile.jsp">Back to Orders</a></h2>
     </div>
     <div id="content">
-        <form action ="Register" method="post">
+        <form action ="EditProfile" method="post">
 		<table>
-		<tr><td>Enter Username:</td><td><input type="text" name="username" value="" ></td></tr>
 		<tr><td>Enter Password:</td><td><input type="password" name="password" value="" ></td></tr>
 		<tr><td>Verify Password:</td><td><input type="password" name="verify" value="" ></td></tr>
 		<tr><td>Enter First Name:</td><td><input type="text" name="first" value="" ></td></tr>
