@@ -41,14 +41,19 @@ public class Register extends HttpServlet {
         DB db = (DB) session.getAttribute("db");
         try {
                 db.connect();
-                DB.addUser(user);
-                db.close();
-                session.setAttribute("user", user);
-                try {
-                        response.sendRedirect("inventory.jsp");
-                } catch (IOException ex) {
-                        Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-                }
+		if(DB.usernameExists(user.getUsername())){
+			session.setAttribute("exists","That username is already taken");
+                	db.close();
+			response.sendRedirect("register.jsp");
+		}else{
+			DB.addUser(user);
+			session.setAttribute("exists", "");
+			session.setAttribute("user", user);
+                	db.close();
+                        response.sendRedirect("Inventory");
+		}
+        } catch (IOException ex) {
+                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
