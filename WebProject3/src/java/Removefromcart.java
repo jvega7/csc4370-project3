@@ -54,7 +54,7 @@ public class Removefromcart extends HttpServlet{
 		cart.setTotal(total);
 		cart.setCartList(cartList);
 		session.setAttribute("cart", cart);
-		response.sendRedirect("inventory.jsp");
+		response.sendRedirect("Inventory");
     }
     
 }

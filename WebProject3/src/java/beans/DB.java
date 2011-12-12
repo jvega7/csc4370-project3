@@ -29,6 +29,8 @@ public class DB{
     	private static final String SQL_TO_READ_OBJECT = "SELECT * FROM ORDERS WHERE userid = ?";
 	private static final String SQL_TO_ADD_USER = "INSERT INTO CUSTOMERS(username, LastName, FirstName, Address, City, State, ZipCode, Phone, EMail, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_TO_DECREASE_ITEM = "UPDATE critchea1.inventory SET quantity = quantity - 1 WHERE sku = ?";
+	private static final String SQL_TO_CHECK_USERNAME_EXISTS = "select * from critchea1.customers where username=?";
+		
 	private static LinkedList<Timestamp> timestamps;
 
 	public static LinkedList<Timestamp> getTimestamps() {
@@ -194,5 +196,19 @@ public class DB{
 	}
 	pstmt.close();
 	System.out.println(sku + " decreased " + quantity + " time(s).");
+    }
+    public static boolean usernameExists(String username) throws SQLException{
+	    boolean exists = true;
+	    PreparedStatement pstmt = dbCon.prepareStatement(SQL_TO_CHECK_USERNAME_EXISTS);
+	    pstmt.setString(1, username);
+	    ResultSet rs = pstmt.executeQuery();
+	    if(rs.next()){
+		    exists = true;
+	    } else {
+		    exists = false;
+	    }
+	    rs.close();
+	    pstmt.close();
+	    return exists;
     }
 }

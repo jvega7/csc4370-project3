@@ -18,4 +18,6 @@
 		</table>
             <input type="submit" value="Register" name="register" >
         </form>
+		<br/>
+		<p><% out.print(session.getAttribute("exists"));%> </p>
 	<jsp:include page="htmlfooter.html" ></jsp:include>
