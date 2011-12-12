@@ -52,16 +52,16 @@
     <div id="content">
         <form action ="EditProfile" method="post">
 		<table>
-		<tr><td>Enter Password:</td><td><input type="password" name="password" value="" ></td></tr>
-		<tr><td>Verify Password:</td><td><input type="password" name="verify" value="" ></td></tr>
-		<tr><td>Enter First Name:</td><td><input type="text" name="first" value="" ></td></tr>
-		<tr><td>Enter Last Name:</td><td><input type="text" name="last" value="" ></td></tr>
-		<tr><td>Enter Address:</td><td><input type="text" name="address" value="" ></td></tr>
-		<tr><td>Enter City:</td><td><input type="text" name="city" value="" ></td></tr>
-		<tr><td>Enter State:</td><td><input type="text" maxlength="2" name="state" value="" ></td></tr>
-		<tr><td>Enter Zip Code:</td><td><input type="text" maxlength="5" name="zipcode" value="" ></td></tr>
-		<tr><td>Enter Phone:</td><td><input type="text" maxlength="10" name="phone" value="" ></td></tr>
-		<tr><td>Enter Email:</td><td><input type="text" name="email" value="" ></td></tr>
+			<tr><td>Enter Password:</td><td><input type="password" name="password" value="<jsp:getProperty name="user" property="password"/>" ></td></tr>
+			<tr><td>Verify Password:</td><td><input type="password" name="verify" value="<jsp:getProperty name="user" property="password"/>" ></td></tr>
+			<tr><td>Enter First Name:</td><td><input type="text" name="first" value="<jsp:getProperty name="user" property="firstName"/>" ></td></tr>
+			<tr><td>Enter Last Name:</td><td><input type="text" name="last" value="<jsp:getProperty name="user" property="lastName"/>" ></td></tr>
+			<tr><td>Enter Address:</td><td><input type="text" name="address" value="<jsp:getProperty name="user" property="address"/>" ></td></tr>
+			<tr><td>Enter City:</td><td><input type="text" name="city" value="<jsp:getProperty name="user" property="city"/>" ></td></tr>
+			<tr><td>Enter State:</td><td><input type="text" maxlength="2" name="state" value="<jsp:getProperty name="user" property="state"/>" ></td></tr>
+			<tr><td>Enter Zip Code:</td><td><input type="text" maxlength="5" name="zipcode" value="<jsp:getProperty name="user" property="zipcode"/>" ></td></tr>
+			<tr><td>Enter Phone:</td><td><input type="text" maxlength="10" name="phone" value="<jsp:getProperty name="user" property="phone"/>" ></td></tr>
+			<tr><td>Enter Email:</td><td><input type="text" name="email" value="<jsp:getProperty name="user" property="email"/>" ></td></tr>
 		</table>
             <input type="submit" value="Update" name="update" >
         </form>
